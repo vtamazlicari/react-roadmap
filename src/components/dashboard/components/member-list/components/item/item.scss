@@ -1,0 +1,16 @@
+select {
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.list-item {
+  display: flex;
+  padding: 20px;
+  margin: 1px 0;
+  background-color: white;
+  .col {
+    width: 33.5%;
+  }
+}
