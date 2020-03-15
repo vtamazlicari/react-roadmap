@@ -2,12 +2,13 @@ import React, {useContext} from 'react';
 import Modal from 'react-modal';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as yup from "yup";
-
-import RemoveIcon from "../../../../../shared/components/remove/remove";
-import './add-member-modal.scss';
-import {Person} from "../../../types";
 import {v4} from "uuid";
-import {AppContext} from "../../../../../shared/context/context";
+
+import {Person} from "../../../types";
+import RemoveIcon from "../../../../../common/components/remove/remove";
+import {AppContext} from "../../../../../common/context/context";
+
+import './add-member-modal.scss';
 
 const modalStyle = {
     content: {

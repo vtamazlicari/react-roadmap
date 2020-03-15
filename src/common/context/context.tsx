@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Member, Person} from "../../pages/dashboard/types";
+import {Member, Person} from "../../components/dashboard/types";
 
 interface AppContextType {
     state: {

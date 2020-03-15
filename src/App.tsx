@@ -1,8 +1,8 @@
 import React from 'react';
 
 import './App.scss';
-import Dashboard from './pages/dashboard/dashboard';
-import { ContextProvider } from "./shared/context/context";
+import { Dashboard } from './components';
+import { ContextProvider } from "./common/context/context";
 
 function App() {
   return (

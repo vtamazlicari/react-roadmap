@@ -2,14 +2,14 @@ import React, {useEffect, useState} from "react";
 
 import {AccessLevel, Member, Option, Roles} from "../../../../types";
 import './item.scss'
-import RemoveIcon from '../../../../../../shared/components/remove/remove';
+import RemoveIcon from '../../../../../../common/components/remove/remove';
 
 interface Props {
     member: Member,
     personOptions: Option[],
     index: number;
     onChange: (value: Member, index: number) => void;
-    removeItem: (index: number) => void;
+    removeItem: (person_id: string) => void;
 }
 
 export default function ({member, personOptions, onChange, index, removeItem}: Props) {
@@ -69,7 +69,7 @@ export default function ({member, personOptions, onChange, index, removeItem}: P
                     {accessOptions.map((value, index) => (<option key={index} value={value}>{value}</option>))}
                 </select>
             </div>
-            <span onClick={() => removeItem(index)}><RemoveIcon/></span>
+            <span onClick={() => removeItem(state.person_id)}><RemoveIcon/></span>
         </li>
     );
 }
