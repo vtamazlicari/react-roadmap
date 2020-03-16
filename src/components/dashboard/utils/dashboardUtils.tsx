@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import {AppContext} from '../../../common/context/context';
 import {useFetchMembers, useFetchPersons} from '../actions/dashboardActions';
 

@@ -7,13 +7,13 @@ import './member-list.scss';
 
 interface Props {
     membersList: Member[];
-    getListItem: (id: string) => Option[];
+    getPersonsOptions: (idPerson: string) => Option[];
     addItem: () => void;
     handleChange: (member: Member, lastIndex: number) => any,
     removeItem: (person_id: string) => any;
 }
 
-export default function ({membersList, getListItem, addItem, removeItem, handleChange}: Props) {
+export default function ({membersList, getPersonsOptions, addItem, removeItem, handleChange}: Props) {
 
     return (
         <ul>
@@ -25,7 +25,7 @@ export default function ({membersList, getListItem, addItem, removeItem, handleC
             {membersList.map((member, index) => (
                 <Item key={index}
                       member={member}
-                      personOptions={getListItem(member.person_id)}
+                      personOptions={getPersonsOptions(member.person_id)}
                       index={index}
                       removeItem={removeItem}
                       onChange={handleChange}

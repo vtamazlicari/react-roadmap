@@ -69,7 +69,9 @@ export default function ({member, personOptions, onChange, index, removeItem}: P
                     {accessOptions.map((value, index) => (<option key={index} value={value}>{value}</option>))}
                 </select>
             </div>
-            <span onClick={() => removeItem(state.person_id)}><RemoveIcon/></span>
+            <span onClick={() => removeItem(state.person_id)}>
+                <RemoveIcon/>
+            </span>
         </li>
     );
 }

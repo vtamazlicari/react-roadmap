@@ -20,7 +20,7 @@ export default function Dashboard() {
         setMembersList([...members]);
     }, [members]);
 
-    const getListItem = (id: string) => {
+    const getUnusedMembers = (id: string) => {
         return persons.filter(person => person.person_id === id ||
             !membersList.find(member => person.person_id === member.person_id))
             .map(value => ({
@@ -60,7 +60,7 @@ export default function Dashboard() {
             />
             <MemberList
                 membersList={membersList}
-                getListItem={getListItem}
+                getPersonsOptions={getUnusedMembers}
                 addItem={addItem}
                 handleChange={handleChange}
                 removeItem={removeItem}
