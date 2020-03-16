@@ -20,13 +20,9 @@ export default function Dashboard() {
         setMembersList([...members]);
     }, [members]);
 
-    const getUnusedMembers = (id: string) => {
-        return persons.filter(person => person.person_id === id ||
-            !membersList.find(member => person.person_id === member.person_id))
-            .map(value => ({
-                value: value.person_id,
-                displayValue: `${value.firstname} ${value.lastname}`
-            })) as Option[];
+    const getUnselectedMembers = (idPerson: string) => {
+        const selectedMembers = membersList.map(({ person_id }) => person_id);
+        return persons.filter(person => person.person_id === idPerson || !selectedMembers.includes(person.person_id));
     };
 
     const handleChange = (member: Member, indexInList: number) => {
@@ -37,8 +33,9 @@ export default function Dashboard() {
         if (persons.length === membersList.length) {
             return;
         }
+        const selectedMembers = membersList.map(({ person_id }) => person_id);
         const newItem: Member = {
-            person_id: persons.find(person => !membersList.find(member => person.person_id === member.person_id))?.person_id || '',
+            person_id: persons.find(person => !selectedMembers.includes(person.person_id))?.person_id || '',
             role: Roles.CUSTOMER,
             access_level: AccessLevel.READ
         };
@@ -51,7 +48,6 @@ export default function Dashboard() {
 
     const saveChanges = () => setMembersStore(membersList);
 
-
     return (
         <div>
             <Header
@@ -60,7 +56,7 @@ export default function Dashboard() {
             />
             <MemberList
                 membersList={membersList}
-                getPersonsOptions={getUnusedMembers}
+                getPersonsOptions={getUnselectedMembers}
                 addItem={addItem}
                 handleChange={handleChange}
                 removeItem={removeItem}

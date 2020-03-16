@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 
-import {AccessLevel, Member, Option, Roles} from "../../../../types";
+import {AccessLevel, Member, Option, Person, Roles} from "../../../../types";
 import './item.scss'
 import RemoveIcon from '../../../../../../common/components/remove/remove';
 
 interface Props {
     member: Member,
-    personOptions: Option[],
+    personOptions: Person[],
     index: number;
     onChange: (value: Member, index: number) => void;
     removeItem: (person_id: string) => void;
@@ -53,8 +53,8 @@ export default function ({member, personOptions, onChange, index, removeItem}: P
                     event.persist();
                     handleChange({person_id: event.target.value}, setState);
                 }}>
-                    {personOptions.map(({value, displayValue}, index) => (
-                        <option key={index} value={value}>{displayValue}</option>))}
+                    {personOptions.map(({person_id, firstname, lastname}, index) => (
+                        <option key={index} value={person_id}>{`${firstname} ${lastname}`}</option>))}
                 </select>
             </div>
             <div className="col">

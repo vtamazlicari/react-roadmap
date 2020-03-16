@@ -1,16 +1,16 @@
 import React from "react";
 
 import Item from "./components/item/item";
-import {Member, Option} from '../../types';
+import {Member, Option, Person} from '../../types';
 
 import './member-list.scss';
 
 interface Props {
     membersList: Member[];
-    getPersonsOptions: (idPerson: string) => Option[];
+    getPersonsOptions: (idPerson: string) => Person[];
     addItem: () => void;
-    handleChange: (member: Member, lastIndex: number) => any,
-    removeItem: (person_id: string) => any;
+    handleChange: (member: Member, lastIndex: number) => void,
+    removeItem: (person_id: string) => void;
 }
 
 export default function ({membersList, getPersonsOptions, addItem, removeItem, handleChange}: Props) {
