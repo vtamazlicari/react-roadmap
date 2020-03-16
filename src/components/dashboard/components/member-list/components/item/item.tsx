@@ -38,6 +38,10 @@ export default function ({member, personOptions, onChange, index, removeItem}: P
         onChange(state, index);
     }, [state]);
 
+    useEffect(() => {
+        setState(member)
+    }, [member]);
+
     const handleChange = (value: object, func: (arg: Member) => void) => {
         func({...state, ...value});
     };
