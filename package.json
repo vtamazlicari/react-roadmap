@@ -13,7 +13,7 @@
     "@types/react-modal": "^3.10.5",
     "@types/uuid": "^7.0.0",
     "@types/yup": "^0.26.32",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "formik": "^2.1.4",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
