@@ -1,44 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Roadmap — Members Dashboard
 
-## Available Scripts
+A small React + TypeScript dashboard for managing project members: pick people, assign them a role and an access level, and create new people through a validated form.
 
-In the project directory, you can run:
+Built with [Create React App](https://github.com/facebook/create-react-app), React Context for state, [Formik](https://formik.org/) + [Yup](https://github.com/jquense/yup) for forms, [react-modal](https://github.com/reactjs/react-modal) and SCSS.
 
-### `yarn start`
+## Features
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Member list** — each row has a person, role and access level dropdown.
+- **Role-based access levels** — the access options depend on the role:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  | Role     | Allowed access levels  |
+  |----------|------------------------|
+  | customer | read                   |
+  | employee | read, write            |
+  | manager  | read, write, admin     |
 
-### `yarn test`
+- **No duplicates** — a person already in the list is hidden from the other rows' dropdowns.
+- **Add / remove members** — "Add new member" adds a row with the next free person; the ✕ icon removes it.
+- **Save changes** — edits stay local until you click **SaveChange**, which only shows up when the list differs from the saved state.
+- **Create a person** — "New member" opens a modal form (first and last name are required) and adds the person to the selectable list.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting started
 
-### `yarn build`
+```bash
+yarn install
+yarn start
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Then open [http://localhost:3000](http://localhost:3000).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+> `node-sass@4` only builds on older Node versions — use **Node 12 or 14** (e.g. `nvm use 14`).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Scripts
 
-### `yarn eject`
+| Command      | What it does                              |
+|--------------|-------------------------------------------|
+| `yarn start` | Run the dev server with hot reload        |
+| `yarn test`  | Run tests in watch mode                   |
+| `yarn build` | Build a production bundle into `build/`   |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Data
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+There is no backend. Initial data is loaded on startup from two static files in [public/](public/):
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [public/persons.json](public/persons.json) — everyone who can be added as a member
+- [public/members.json](public/members.json) — the initial member list (`person_id`, `role`, `access_level`)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Changes live in memory only and are lost on page reload.
 
-## Learn More
+## Project structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+src/
+├── App.tsx                          # Wraps the dashboard in the context provider
+├── common/
+│   ├── context/context.tsx          # AppContext: persons, members and their setters
+│   └── components/remove/           # ✕ icon
+└── components/dashboard/
+    ├── dashboard.tsx                # Member list state, add/remove/save logic
+    ├── types.ts                     # Member, Person, Roles, AccessLevel
+    ├── actions/dashboardActions.tsx # Hooks that fetch the JSON files
+    ├── utils/dashboardUtils.tsx     # Pushes fetched data into context
+    └── components/
+        ├── header/                  # Title, "New member", "SaveChange", create-person modal
+        └── member-list/             # List and per-row item with dropdowns
+```
